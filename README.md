@@ -2,8 +2,7 @@
 
 ## Quick Start
 
-- [Download the latest release](https://github.com/coreui/coreui-free-react-admin-template/archive/refs/heads/main.zip)
-- Clone the repo: `git clone https://github.com/coreui/coreui-free-react-admin-template.git`
+- Clone the repo: `git@github.com:HarishNichi/ReactCoreUI.git`
 
 ### Installation
 
