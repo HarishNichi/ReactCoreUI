@@ -6,7 +6,7 @@ const CustomCheckbox = ({ id, label, checked = false, onChange = () => {}, disab
     <div>
       <CFormCheck 
         id={id} 
-        label={required ? `${label} *` : label}
+        label={required ? `${label} ` : label}
         checked={checked} 
         onChange={onChange} 
         disabled={disabled}
@@ -20,7 +20,7 @@ const CustomInput = ({ id, label, value = '',onChange, disabled = false, require
   return (
     <div>
       <CFormLabel htmlFor={id}>
-        {label}{required && ' *'}
+        {label}{required}
       </CFormLabel>
      
       <CFormInput 
@@ -42,7 +42,7 @@ const CustomSelect = ({ id, label, options = [],onChange, value = '', disabled =
   return (
     <div>
       <CFormLabel htmlFor={id}>
-        {label}{required && ' *'}
+        {label}{required}
       </CFormLabel>
       <CFormSelect 
         id={id}
@@ -67,7 +67,7 @@ const CustomSelect = ({ id, label, options = [],onChange, value = '', disabled =
 
 const CustomRadio = ({ name, options = [], value = '', onChange, disabled = false, required = false, ...rest }) => {
   return (
-    <div>
+    <div className=''>
       {options.map((option, index) => (
         <CFormCheck 
           key={index}
@@ -96,19 +96,18 @@ const CustomButton = ({ label, onClick = () => {}, disabled = false, type = 'but
   );
 };
 
-const CustomFormFloating = ({ id,type, placeholder, label, ...rest }) => {
+const CustomFormFloating = ({ id,type, onChange, placeholder, label,required,...rest }) => {
   return (
-    <CFormFloating className="mb-3" {...rest}>
-      <CFormInput type={type} id={id} placeholder={placeholder} />
-      <CFormLabel htmlFor={id}>{label}</CFormLabel>
-    </CFormFloating>
+    <div>
+    <CFormLabel htmlFor={id}>{label}{required}</CFormLabel>
+    <CFormInput type={type} id={id} placeholder={placeholder} onChange={(evt)=>{onChange(evt.target.value) }} {...rest} />
+    </div>
   );
 };
 
 const CustomFormRange = ({ min, max, label,onChange, defaultValue, id, ...rest }) => {
   return (
-    <CFormRange min={min} max={max} label={label} defaultValue={defaultValue} onChange={(evt)=>{
-        onChange(evt.target.value)
+    <CFormRange min={min} max={max} label={label} defaultValue={defaultValue} onChange={(evt)=>{onChange(evt.target.value)
     }} id={id} {...rest} />
   );
 };
