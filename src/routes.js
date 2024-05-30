@@ -1,3 +1,4 @@
+import { element } from 'prop-types'
 import React from 'react'
 const SiteReport = React.lazy(() => import('./views/main/SiteReport'))
 const ToolSummary = React.lazy(() => import('./views/main/ToolSummary'))
@@ -22,12 +23,14 @@ const MultiCutter= React.lazy(() => import('./views/tool/MultiCutter'))
 const Sander= React.lazy(() => import('./views/tool/Sander'))
 const Stepladder= React.lazy(() => import('./views/tool/Stepladder'))
 const VaccumCleaner= React.lazy(() => import('./views/tool/VacuumCleaner'))
+const Demo= React.lazy(() => import('./views/pages/demo/Demo'))
+
 
 
 //const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
 const routes = [
-  { path: '/dashboard', exact: true, name: 'Home' },
+  { path: '/demo',  name: 'Demo', element: Demo },
   { path: '/tool-overview', name: 'ToolsOverview', element: ToolsOverview },
   { path: '/site-report', name: 'SiteReport', element: SiteReport },
   { path: '/tool-summary', name: 'ToolSummary', element: ToolSummary},
