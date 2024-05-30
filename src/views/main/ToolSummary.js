@@ -2,7 +2,7 @@ import React from "react";
 
 function ToolSummary(){
    return(
-       <h1>Tools ToolsOverview</h1>
+       <h1>Tool Summary</h1>
    );
 }
 
