@@ -38,7 +38,7 @@ const CustomInput = ({ id, label, value = '',onChange, disabled = false, require
   );
 };
 
-const CustomSelect = ({ id, label, options = [], value = '', disabled = false, required = false, ...rest }) => {
+const CustomSelect = ({ id, label, options = [],onChange, value = '', disabled = false, required = false, ...rest }) => {
   return (
     <div>
       <CFormLabel htmlFor={id}>
@@ -49,6 +49,9 @@ const CustomSelect = ({ id, label, options = [], value = '', disabled = false, r
         value={value}
         disabled={disabled}
         required={required}
+        onChange={(evt)=>{
+            onChange(evt.target.value)
+        }}
         {...rest}
       >
         <option value="">Select an option</option>
@@ -62,7 +65,7 @@ const CustomSelect = ({ id, label, options = [], value = '', disabled = false, r
   );
 };
 
-const CustomRadio = ({ name, options = [], value = '', onChange = () => {}, disabled = false, required = false, ...rest }) => {
+const CustomRadio = ({ name, options = [], value = '', onChange, disabled = false, required = false, ...rest }) => {
   return (
     <div>
       {options.map((option, index) => (
@@ -74,7 +77,9 @@ const CustomRadio = ({ name, options = [], value = '', onChange = () => {}, disa
           label={required ? `${option.label} *` : option.label}
           value={option.value}
           checked={value === option.value}
-          onChange={onChange}
+          onChange={(evt)=>{
+            onChange(evt.target.value)
+        }}
           disabled={disabled}
           {...rest}
         />
@@ -100,9 +105,11 @@ const CustomFormFloating = ({ id,type, placeholder, label, ...rest }) => {
   );
 };
 
-const CustomFormRange = ({ min, max, label, defaultValue, id, ...rest }) => {
+const CustomFormRange = ({ min, max, label,onChange, defaultValue, id, ...rest }) => {
   return (
-    <CFormRange min={min} max={max} label={label} defaultValue={defaultValue} id={id} {...rest} />
+    <CFormRange min={min} max={max} label={label} defaultValue={defaultValue} onChange={(evt)=>{
+        onChange(evt.target.value)
+    }} id={id} {...rest} />
   );
 };
   
@@ -113,18 +120,22 @@ const CustomFormSwitch = ({ label, id, defaultChecked, disabled, ...rest }) => {
       id={id}
       defaultChecked={defaultChecked}
       disabled={disabled}
+
       {...rest}
     />
   );
 };
 
-const CustomFormTextarea = ({ id, label, rows, text, ...rest }) => {
+const CustomFormTextarea = ({ id, label, onChange ,rows, text, ...rest }) => {
   return (
     <CFormTextarea
       id={id}
       label={label}
       rows={rows}
       text={text}
+      onChange={(evt)=>{
+        onChange(evt.target.value)
+      }}
       {...rest}
     />
   );
