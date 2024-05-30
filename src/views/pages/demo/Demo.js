@@ -39,28 +39,24 @@ const FormExample = () => {
   };
 
   return (
-    <CForm noValidate validated={validated} onSubmit={handleSubmit}>
-      <CustomCheckbox
-        id="custom-checkbox"
-        label="Check me out"
-        checked={formData.checkbox}
-        onChange={(value) => handleChange('checkbox', value)}
-        required
-        feedbackInvalid="You must agree before submitting"
-      />
-
-      <CustomInput
+    <div class="container">
+    <div class="row">
+    <div class="col-md-6  align-items-center">
+    <div className='d-flex flex-column card m-0'>
+       <h3 className='text-center m-2'>Demo Form</h3>
+    <CForm noValidate validated={validated} onSubmit={handleSubmit} className='m-2'>
+      <CustomInput 
         type="text"
         id="custom-text-input"
-        label="Text input"
+        label="Name"
         value={formData.textInput}
         onChange={(value) => handleChange('textInput', value)}
-        placeholder="Enter text"
+        placeholder="Enter Your Name"
         required
         feedbackInvalid="Please enter a valid text"
       />
 
-      <CustomSelect
+      <CustomSelect className="mb-4"
         id="custom-select"
         label="Select"
         value={formData.select}
@@ -71,10 +67,10 @@ const FormExample = () => {
           { value: '3', label: 'Option 3' }
         ]}
         required
-        feedbackInvalid="Please select an option"
+        feedbackInvalid="Please select any one option"
       />
 
-      <CustomFormRange
+      <CustomFormRange className="pt-2 mb-4"
         id="custom-form-range"
         label="Range"
         min={0}
@@ -85,18 +81,18 @@ const FormExample = () => {
         feedbackInvalid="Please select a value between 0 and 10"
       />
 
-      <CustomFormFloating
+      <CustomFormFloating className="pt-2 mb-4"
         id="custom-form-floating"
         type="email"
         label="Email address"
         value={formData.floating}
         onChange={(value) => handleChange('floating', value)}
-        placeholder="name@example.com"
+        placeholder="Enter You Email"
         required
         feedbackInvalid="Please enter a valid email"
       />
 
-      <CustomFormTextarea
+      <CustomFormTextarea className="pt-2 mb-4"
         id="custom-form-textarea"
         label="Textarea"
         value={formData.textarea}
@@ -106,9 +102,22 @@ const FormExample = () => {
         feedbackInvalid="Please enter some text"
       />
 
-    <CustomButton type="submit" color="primary" label="Submit form" />
-
+      <CustomCheckbox className="pt-2 mb-4"
+        id="custom-checkbox"
+        label="agree all conditions"
+        checked={formData.checkbox}
+        onChange={(value) => handleChange('checkbox', value)}
+        required
+        feedbackInvalid="You must agree before submitting"
+      />
+    <div className='text-wrap'>
+       <CustomButton className="w-100" type="submit" color="primary" label="Submit form" />
+    </div>
     </CForm>
+    </div>
+    </div>
+    </div>
+    </div>
   );
 };
 
