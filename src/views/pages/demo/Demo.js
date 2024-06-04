@@ -1,124 +1,104 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { CForm, CButton } from '@coreui/react';
 import {
   CustomCheckbox,
   CustomInput,
   CustomSelect,
-  CustomButton,
+  CustomRadio,
   CustomFormRange,
   CustomFormFloating,
-  CustomFormTextarea
-} from '../../../components/input'; // Import your custom components here
-import { CForm } from '@coreui/react';
+  CustomFormSwitch,
+  CustomFormTextarea,
+} from '../../../components/custom/custom';
+import { Link } from 'react-router-dom';
 
-const FormExample = () => {
-  const [validated, setValidated] = useState(false);
+const MyForm = () => {
   const [formData, setFormData] = useState({
-    checkbox: false,
-    textInput: '',
+    input: '',
     select: '',
-    range: 5,
-    floating: '',
-    textarea: ''
+    // radio: '',
+    // checkbox: false,
+    // range: 50,
+    // floating: '',
+    // switch: false,
+    // textarea: '',
   });
 
-  const handleChange = (name, value) => {
-    console.log(value)
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+  const refs = {
+    input: useRef(),
+    select: useRef(),
+    // radio: useRef(),
+    // checkbox: useRef(),
+    // range: useRef(),
+    // floating: useRef(),
+    // switch: useRef(),
+    // textarea: useRef(),
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+    const validationStatuses = Object.values(refs).map((ref) => {
+      try {
+        return ref.current.validate()
+      } catch (error) {
+        // console.error(`Error validating ${ref.current.id}:`, error)
+        return false
+      }
+    })
+
+    console.log(validationStatuses)
+
+    const isFormValid = validationStatuses.every((isValid) => isValid)
+
+    if (isFormValid) {
+      console.log('Form is valid. Submitting data...')
+      const formData = {
+        input: refs.input.current.getValue(),
+        select:refs.select.current.getValue(),
+      }
+      console.log('Form Data:', formData)
+      setFormData(formData)
+    } else {
+      console.log('Form is invalid. Please correct the errors.')
     }
-    setValidated(true);
-  };
+  }
 
   return (
-    <div class="container">
-    <div class="row">
-    <div class="col-md-6  align-items-center">
-    <div className='d-flex flex-column card m-0'>
-       <h3 className='text-center m-2'>Demo Form</h3>
-    <CForm noValidate validated={validated} onSubmit={handleSubmit} className='m-2'>
-      <CustomInput 
-        type="text"
-        id="custom-text-input"
-        label="Name"
-        value={formData.textInput}
-        onChange={(value) => handleChange('textInput', value)}
-        placeholder="Enter Your Name"
+    <div className='container '>
+    <div className='row'>
+    <div className='col-6 '>
+    <CForm onSubmit={handleSubmit}>
+      <CustomInput  
+      className="mb-4"
+        id="custom-input"
+        ref={refs.input}
+        label="Custom Input"
+        value={formData.input}
+        onChange={(value) => setFormData({ ...formData, input: value })}
         required
-        feedbackInvalid="Please enter a valid text"
+        pattern="^[A-Za-z]+$"
+        minLength={3}
+        maxLength={20}
       />
-
-      <CustomSelect className="mb-4"
+      <CustomSelect
+        className="mb-4"
         id="custom-select"
-        label="Select"
-        value={formData.select}
-        onChange={(value) => handleChange('select', value)}
+        ref={refs.select}
+        label="Custom Select"
         options={[
           { value: '1', label: 'Option 1' },
           { value: '2', label: 'Option 2' },
-          { value: '3', label: 'Option 3' }
         ]}
+        value={formData.select}
+        onChange={(value) => setFormData({ ...formData, select: value })}
         required
-        feedbackInvalid="Please select any one option"
       />
-
-      <CustomFormRange className="pt-2 mb-4"
-        id="custom-form-range"
-        label="Range"
-        min={0}
-        max={10}
-        value={formData.range}
-        onChange={(value) => handleChange('range', value)}
-        required
-        feedbackInvalid="Please select a value between 0 and 10"
-      />
-
-      <CustomFormFloating className="pt-2 mb-4"
-        id="custom-form-floating"
-        type="email"
-        label="Email address"
-        value={formData.floating}
-        onChange={(value) => handleChange('floating', value)}
-        placeholder="Enter You Email"
-        required
-        feedbackInvalid="Please enter a valid email"
-      />
-
-      <CustomFormTextarea className="pt-2 mb-4"
-        id="custom-form-textarea"
-        label="Textarea"
-        value={formData.textarea}
-        onChange={(value) => handleChange('textarea', value)}
-        rows={3}
-        required
-        feedbackInvalid="Please enter some text"
-      />
-
-      <CustomCheckbox className="pt-2 mb-4"
-        id="custom-checkbox"
-        label="agree all conditions"
-        checked={formData.checkbox}
-        onChange={(value) => handleChange('checkbox', value)}
-        required
-        feedbackInvalid="You must agree before submitting"
-      />
-    <div className='text-wrap'>
-       <CustomButton className="w-100" type="submit" color="primary" label="Submit form" />
-    </div>
+      <CButton type="submit" color='primary' className='w-100' onClick={handleSubmit}><Link to={"/demo1"} className='link-light'>Submit</Link></CButton>
     </CForm>
-    </div>
     </div>
     </div>
     </div>
   );
 };
 
-export default FormExample;
+export default MyForm;

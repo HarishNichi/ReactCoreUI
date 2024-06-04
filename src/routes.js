@@ -24,6 +24,7 @@ const Sander= React.lazy(() => import('./views/tool/Sander'))
 const Stepladder= React.lazy(() => import('./views/tool/Stepladder'))
 const VaccumCleaner= React.lazy(() => import('./views/tool/VacuumCleaner'))
 const Demo= React.lazy(() => import('./views/pages/demo/Demo'))
+const Demo1= React.lazy(() => import('./views/pages/demo/Demo2'))
 
 
 
@@ -31,6 +32,7 @@ const Demo= React.lazy(() => import('./views/pages/demo/Demo'))
 
 const routes = [
   { path: '/demo',  name: 'Demo', element: Demo },
+  { path: '/demo1',  name: 'Demo1', element: Demo1 },
   { path: '/tool-overview', name: 'ToolsOverview', element: ToolsOverview },
   { path: '/site-report', name: 'SiteReport', element: SiteReport },
   { path: '/tool-summary', name: 'ToolSummary', element: ToolSummary},
