@@ -83,7 +83,7 @@ const MyForm = () => {
       <div className='text-center'>
         <h3 className=''>Address Form</h3>
       </div>
-      <div className="d-flex">
+      <div className="d-md-flex d-lg-flex d-sm-flex flex-sm-column flex-md-row flex-lg-row">
         <div className="w-100 m-2">
           <CustomInput
             id="custom-input"
@@ -134,7 +134,7 @@ const MyForm = () => {
         </div>
       </div>
 
-      <div className="d-flex ">
+      <div className="d-md-flex d-lg-flex d-sm-flex flex-sm-column flex-md-row flex-lg-row">
         <div className="w-100 card  m-2">
           <CFormLabel className='text-center'>Resedential Address</CFormLabel>
           <div className='m-2'>
@@ -256,7 +256,7 @@ const MyForm = () => {
         </div>
         </div>
       </div> 
-      <div className='d-flex'>
+      <div className='d-md-flex d-lg-flex d-sm-flex flex-sm-column flex-md-row flex-lg-row'>
         <div className='w-100 m-2'>
         <CustomSelect 
         id="custom-select"
@@ -290,7 +290,7 @@ const MyForm = () => {
         />
         </div>
       </div> 
-      <div className='d-flex'>
+      <div className='d-md-flex d-lg-flex d-sm-flex flex-sm-column flex-md-row flex-lg-row m-2'>
         <div className='w-100 m-2'>
         <CFormLabel>AnySuggestions</CFormLabel>
        <CustomFormTextarea
